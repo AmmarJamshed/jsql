@@ -51,7 +51,10 @@ Set-Location $root
 
 $publicUrl = "https://github.com/$Owner/$Repo.git"
 
-git remote remove origin 2>$null
+$prevEap = $ErrorActionPreference
+$ErrorActionPreference = "SilentlyContinue"
+git remote remove origin 2>&1 | Out-Null
+$ErrorActionPreference = $prevEap
 git remote add origin $publicUrl
 # One-shot push with token (avoids storing PAT in .git/config long-term)
 git -c http.extraHeader="AUTHORIZATION: Bearer $Pat" push -u origin main
