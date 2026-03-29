@@ -1,0 +1,1 @@
+# JSQL core package

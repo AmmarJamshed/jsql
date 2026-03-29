@@ -1,0 +1,39 @@
+# Builds a portable zip from the tagged commit and attaches it to GitHub Releases.
+name: Release zip
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create portable archive
+        run: |
+          TAG="${GITHUB_REF_NAME:-snapshot}"
+          OUT="jsql-${TAG}.zip"
+          git archive --format=zip --prefix=jsql/ -o "${OUT}" HEAD
+          echo "Created ${OUT}"
+          ls -la "${OUT}"
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jsql-portable-zip
+          path: jsql-*.zip
+
+      - name: Attach to GitHub Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: jsql-*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

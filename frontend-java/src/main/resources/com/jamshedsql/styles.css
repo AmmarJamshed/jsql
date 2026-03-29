@@ -1,0 +1,209 @@
+/* JSQL — Pokémon-inspired palette */
+.root {
+    -fx-font-family: "Segoe UI", "Helvetica Neue", sans-serif;
+    -fx-font-size: 13px;
+    -fx-background-color: #F5F5F5;
+}
+
+.main-bg {
+    -fx-background-color: #F5F5F5;
+}
+
+.main-inner {
+    -fx-padding: 16 20 20 20;
+}
+
+.sidebar {
+    -fx-background-color: #3B4CCA;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 12, 0, 2, 0);
+}
+
+.brand-title {
+    -fx-text-fill: #FFCB05;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.brand-sub {
+    -fx-text-fill: #e8e8ff;
+    -fx-font-size: 12px;
+}
+
+.tagline {
+    -fx-text-fill: #FFCB05;
+    -fx-font-size: 11px;
+}
+
+.muted {
+    -fx-text-fill: #555555;
+}
+
+.sidebar .muted {
+    -fx-text-fill: #c9d0ff;
+}
+
+.small {
+    -fx-font-size: 11px;
+}
+
+.nav-btn {
+    -fx-background-color: rgba(255, 255, 255, 0.12);
+    -fx-text-fill: white;
+    -fx-background-radius: 22;
+    -fx-padding: 10 14;
+    -fx-cursor: hand;
+}
+
+.nav-btn:hover {
+    -fx-background-color: rgba(255, 203, 5, 0.35);
+}
+
+.nav-btn-active {
+    -fx-background-color: #FFCB05;
+    -fx-text-fill: #3B4CCA;
+    -fx-font-weight: bold;
+}
+
+.poke-toggle {
+    -fx-background-radius: 16;
+    -fx-padding: 6 14;
+    -fx-background-color: #FFCB05;
+    -fx-text-fill: #3B4CCA;
+    -fx-font-weight: bold;
+}
+
+.poke-toggle:selected {
+    -fx-background-color: #FFCB05;
+}
+
+.poke-toggle:!selected {
+    -fx-background-color: #cccccc;
+    -fx-text-fill: #333333;
+}
+
+.card-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+}
+
+.card-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(59, 76, 202, 0.12), 14, 0, 0, 4);
+}
+
+.card-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #3B4CCA;
+}
+
+.section-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.sql-editor, .mono-area, .insight-area {
+    -fx-font-family: "Consolas", "Cascadia Mono", monospace;
+    -fx-background-radius: 10;
+    -fx-border-radius: 10;
+}
+
+.insight-area {
+    -fx-control-inner-background: #fafafa;
+}
+
+.activity-console {
+    -fx-font-family: "Consolas", "Cascadia Mono", monospace;
+    -fx-font-size: 12px;
+    -fx-control-inner-background: #1e1e1e;
+    -fx-text-fill: #d4d4d4;
+    -fx-background-radius: 10;
+}
+
+.btn-primary {
+    -fx-background-color: #3B4CCA;
+    -fx-text-fill: white;
+    -fx-background-radius: 24;
+    -fx-padding: 10 22;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.btn-primary:hover {
+    -fx-background-color: #2f3da8;
+}
+
+.btn-danger {
+    -fx-background-color: #FF0000;
+    -fx-text-fill: white;
+    -fx-background-radius: 24;
+    -fx-padding: 10 22;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.btn-danger:hover {
+    -fx-background-color: #cc0000;
+}
+
+.btn-secondary {
+    -fx-background-color: #FFCB05;
+    -fx-text-fill: #3B4CCA;
+    -fx-background-radius: 24;
+    -fx-padding: 10 22;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #e6b800;
+}
+
+.poke-btn {
+    -fx-border-color: rgba(0,0,0,0.08);
+    -fx-border-radius: 24;
+    -fx-border-width: 1;
+}
+
+.table-view {
+    -fx-background-radius: 10;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #3B4CCA;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.loading-overlay {
+    -fx-background-color: rgba(245, 245, 245, 0.72);
+}
+
+.loading-box {
+    -fx-background-color: white;
+    -fx-background-radius: 16;
+    -fx-padding: 24 40;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 16, 0, 0, 4);
+}
+
+.loading-text {
+    -fx-text-fill: #3B4CCA;
+    -fx-font-weight: bold;
+}
+
+.separator .line {
+    -fx-border-color: rgba(255,255,255,0.25);
+    -fx-border-width: 1 0 0 0;
+}
+
+.progress-indicator {
+    -fx-progress-color: #3B4CCA;
+}

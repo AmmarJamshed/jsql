@@ -1,0 +1,37 @@
+# Python
+backend-python/.venv/
+**/__pycache__/
+**/*.py[cod]
+*$py.class
+**/.pytest_cache/
+**/*.egg-info/
+.eggs/
+
+# Java / Maven
+frontend-java/target/
+**/*.class
+
+# Runtime / local data (regenerated); keep folder in git
+backend-python/data/*
+!backend-python/data/.gitkeep
+
+# IDE
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs & temp
+*.log
+npm-debug.log*
+
+# Optional: keep models off repo
+ollama-models/
+
+# Caches (optional local)
+.cache/

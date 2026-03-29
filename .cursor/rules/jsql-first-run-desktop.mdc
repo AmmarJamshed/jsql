@@ -1,0 +1,21 @@
+---
+description: JSQL first-run desktop shortcut and user consent
+globs: "**/*.{java,fxml,ps1,md}"
+alwaysApply: false
+---
+
+# JSQL — Desktop icon (first open)
+
+## Rule
+
+When JSQL is **downloaded / installed / first opened**, the app **may offer** to add a **Desktop shortcut**. This must follow:
+
+1. **Explicit permission only** — Show a clear **Yes / Not now** dialog. **Never** create a `.lnk` without the user choosing **Yes**.
+2. **Windows** — Use a supported mechanism (e.g. WScript.Shell via PowerShell) to create the shortcut; target should launch the official entry point (e.g. `scripts/Open-JSQL-Desktop.ps1` for dev, or the packaged `.exe` when using `jpackage`).
+3. **Remember the answer** — Use `java.util.prefs` (or equivalent) so the prompt is **not** shown every launch after the user has responded once (Yes or No).
+4. **Documentation** — README should mention optional Desktop shortcut and that it is **permission-based**.
+
+## Implementation pointers
+
+- `FirstLaunchShortcut` + `DesktopShortcutHelper` in `frontend-java`.
+- Reset for QA: `FirstLaunchShortcut.resetPromptFlagForDevelopment()`.
