@@ -56,10 +56,17 @@ $ErrorActionPreference = "SilentlyContinue"
 git remote remove origin 2>&1 | Out-Null
 $ErrorActionPreference = $prevEap
 git remote add origin $publicUrl
-# One-shot push with token (avoids storing PAT in .git/config long-term)
-git -c http.extraHeader="AUTHORIZATION: Bearer $Pat" push -u origin main
-if ($LASTEXITCODE -ne 0) {
-    Write-Error "git push failed. Check token scopes (repo) and that branch is main."
+# Git for Windows often rejects Bearer; x-access-token URL works and is cleared after push.
+$pushUrl = "https://x-access-token:$Pat@github.com/$Owner/$Repo.git"
+git remote set-url origin $pushUrl
+try {
+    git push -u origin main
+    if ($LASTEXITCODE -ne 0) {
+        Write-Error "git push failed. Check token scopes (repo) and that branch is main."
+    }
+}
+finally {
+    git remote set-url origin $publicUrl
 }
 
 Write-Host ""
