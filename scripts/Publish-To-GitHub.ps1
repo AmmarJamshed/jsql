@@ -39,7 +39,7 @@ catch {
     Write-Host "Creating public repository ${Owner}/${Repo}..."
     $body = @{
         name        = $Repo
-        description = "JSQL (JamshedSQL) — local-first SQL + AI desktop app"
+        description = "JSQL (JamshedSQL) - local-first SQL + AI desktop app"
         private     = $false
     } | ConvertTo-Json
     Invoke-RestMethod -Uri "https://api.github.com/user/repos" -Headers $headers -Method Post -Body $body -ContentType "application/json" | Out-Null
@@ -61,4 +61,4 @@ if ($LASTEXITCODE -ne 0) {
 
 Write-Host ""
 Write-Host "Done. Open: https://github.com/$Owner/$Repo"
-Write-Host "Next: GitHub -> Releases -> create a tag (e.g. v0.1.0) to build the zip via Actions."
+Write-Host "Next: GitHub - Releases - create a tag (e.g. v0.1.0) to build the zip via Actions."
