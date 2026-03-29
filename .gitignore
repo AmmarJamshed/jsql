@@ -33,5 +33,8 @@ npm-debug.log*
 # Optional: keep models off repo
 ollama-models/
 
+# Official Ollama installer is added only in CI / local packaging (do not commit)
+bundled/OllamaSetup.exe
+
 # Caches (optional local)
 .cache/

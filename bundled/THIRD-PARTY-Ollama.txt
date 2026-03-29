@@ -1,0 +1,15 @@
+Ollama (bundled installer in Release zips only)
+==============================================
+
+The file OllamaSetup.exe inside this folder is the official Windows installer from the
+Ollama open-source project.
+
+  Project: https://github.com/ollama/ollama
+  Website: https://ollama.com
+  License: MIT (see Ollama repository)
+
+Release builds of JSQL download the current "latest" OllamaSetup.exe from GitHub at
+package time and place it here so you do not need a separate Ollama download.
+
+If you cloned the repo without a Release zip, this folder may not contain the .exe;
+use scripts\Install-Bundled-Ollama.bat (will tell you) or get a zip from GitHub Releases.

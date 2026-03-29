@@ -1,0 +1,7 @@
+Paste this into the GitHub repository "Description" field (gear icon next to About):
+
+JSQL — Local SQL + AI desktop app for Windows. One zip: app + bundled Ollama installer. JDK + Python still required.
+
+Shorter option (if character limit):
+
+JSQL — Local SQL + AI desktop app. Release zip includes Ollama for Windows.

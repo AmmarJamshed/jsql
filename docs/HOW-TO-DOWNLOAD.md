@@ -4,90 +4,90 @@ JSQL is a **desktop app** for your own computer. This guide is written so you do
 
 ---
 
-## What you need on your Windows PC
+## Easiest download (one zip, includes Ollama installer)
 
-1. **Windows 10 or 11** (64-bit).
-2. **Internet** — the first time you run the app, it may download build tools (Maven) and Python libraries.
-3. **Java 17 or newer** — often called a **JDK**. If you do not have it:
-   - Install **Temurin 17+** or another JDK from [Adoptium](https://adoptium.net/) or your vendor of choice.
-   - During or after install, make sure `java` works in a new Command Prompt (optional: set `JAVA_HOME`).
+1. Open this link in your browser (**always points at the newest release**):
 
-4. **Python 3.11 or 3.12** — from [python.org](https://www.python.org/downloads/).  
-   During setup, turn on **“Add python.exe to PATH”** (or use the **“py”** launcher that the installer adds).
+   **[https://github.com/AmmarJamshed/jsql/releases/latest/download/JSQL-Windows-with-Ollama.zip](https://github.com/AmmarJamshed/jsql/releases/latest/download/JSQL-Windows-with-Ollama.zip)**
 
-5. **Ollama (only if you want AI features)** — SQL and CSV still work without it.  
-   - We **cannot** put Ollama inside our zip (license and size). You install it yourself:
-   - Download **Ollama for Windows** from **[https://ollama.com/download](https://ollama.com/download)**.
-   - Open the Ollama app so it runs in the background.
-   - In a terminal run: `ollama pull llama3.2` (or another model you prefer).
+2. If the download does not start, go to **[Releases](https://github.com/AmmarJamshed/jsql/releases)** and click **`JSQL-Windows-with-Ollama.zip`** under **Assets**.
+
+3. **Extract** the zip anywhere (for example `D:\jsql` or `Desktop\jsql`). You should see a **`jsql`** folder containing **`bundled`**, **`scripts`**, **`frontend-java`**, **`backend-python`**, etc.
+
+Inside **`jsql\bundled`** you will find **`OllamaSetup.exe`** — that is the **official** Ollama Windows installer (MIT license, from the Ollama project). You do **not** need to visit ollama.com first.
 
 ---
 
-## Step A — Get the project as a zip
+## What you still need on your PC
 
-**Option 1 — GitHub Releases (recommended)**  
-1. Open the JSQL repository on GitHub.  
-2. Click **Releases** (usually on the right side of the repo page).  
-3. Download the file named like **`jsql-v0.1.0.zip`** (the exact version number may differ).  
-4. **Extract** the zip to a folder you keep, for example `C:\Users\YourName\jsql` or `D:\jsql`.  
-   After extraction you should see folders such as **`frontend-java`**, **`backend-python`**, and **`scripts`**.
-
-**Option 2 — Clone with Git**  
-If you use Git: clone the repository, then open the folder. You get the same layout as the zip.
+| You need | Why |
+|----------|-----|
+| **Windows 10 or 11** (64-bit) | The bundled installer and scripts target Windows. |
+| **Internet (first time)** | Python packages and Maven may download on first run. |
+| **Java 17+ (JDK)** | Not inside the zip — install from [Adoptium](https://adoptium.net/) or similar. |
+| **Python 3.11 or 3.12** | Not inside the zip — install from [python.org](https://www.python.org/downloads/) and enable **Add to PATH**. |
 
 ---
 
-## Step B — Install Python dependencies (one time per PC)
+## Step-by-step after extracting
 
-1. Open the extracted **`jsql`** folder.
-2. Double-click **`scripts\Windows-1-Install-Python-Deps.bat`**.  
-3. Wait until it finishes. It creates **`backend-python\.venv`** and installs packages listed in **`requirements.txt`**.  
-4. If it says Python was not found, install Python from python.org and run the batch file again.
+### Step 1 — Install Ollama (from the zip, no extra download)
 
-This step downloads **PyTorch**, **sentence-transformers**, and other libraries — it can take several minutes and needs disk space.
+1. Open **`jsql\scripts`**.
+2. Double-click **`Install-Bundled-Ollama.bat`**.  
+   It starts **`OllamaSetup.exe`** from **`jsql\bundled`**.  
+3. Finish the installer, then open **Ollama** from the Start menu so it runs in the background.
+4. Open **Command Prompt** or **PowerShell** once and run: **`ollama pull llama3.2`** (downloads the AI model; needs Internet).
+
+*(SQL and CSV features work without Ollama; AI features need Ollama running.)*
+
+### Step 2 — Install Python packages for JSQL (one time)
+
+1. Double-click **`scripts\Windows-1-Install-Python-Deps.bat`**.  
+2. Wait until it finishes (can take several minutes).
+
+### Step 3 — Start JSQL
+
+1. Double-click **`Start-JSQL.bat`** in the **`jsql`** folder  
+   **or** **`scripts\Windows-2-Start-JSQL.bat`**.
+
+The first launch may take extra time while Maven downloads tools. Later starts are faster.
+
+### Optional — Desktop icon
+
+The first time the app opens, you may be asked to add a **Desktop** shortcut. Choose **Yes** if you want **`JSQL.lnk`**.
 
 ---
 
-## Step C — Start the app
+## If you used `git clone` instead of the zip
 
-1. Double-click **`scripts\Windows-2-Start-JSQL.bat`**  
-   **or** double-click **`Start-JSQL.bat`** in the main **`jsql`** folder.
+The repository on GitHub does **not** store **`OllamaSetup.exe`** (too large). Either:
 
-2. The **first** run may take a while: Maven may download itself and Java libraries. Later starts are faster.
-
-3. The **JSQL window** should open. The app tries to start the **backend** in the background if nothing is already listening on port **8765**.
+- Download **`JSQL-Windows-with-Ollama.zip`** from **Releases** and copy **`bundled\OllamaSetup.exe`** into your clone’s **`bundled`** folder, **or**
+- Install Ollama from [https://ollama.com/download](https://ollama.com/download).
 
 ---
 
-## Desktop shortcut (optional)
-
-The first time the app opens on Windows, it may ask: **add a Desktop icon?**  
-If you click **Yes**, it creates **`JSQL.lnk`** on your Desktop. That shortcut runs the same launcher script as the batch files.
-
-You can always create your own shortcut: point it to **`scripts\Open-JSQL-Desktop.ps1`** (run with PowerShell) or to **`Start-JSQL.bat`**.
-
----
-
-## What is **not** inside our zip
+## What is not inside the zip
 
 | Item | Why |
 |------|-----|
-| **Ollama** | Official installer only — [ollama.com/download](https://ollama.com/download). |
-| **JDK** | Too large; install separately. |
-| **Python venv** | Created on **your** machine by the install batch file (correct for your PC). |
-| **A single “one-click .exe” installer** | This release is a **portable source + scripts** layout. A full installer can be added later (e.g. `jpackage`). |
+| **JDK** | Install separately (see above). |
+| **Python venv** | Created on your PC by **`Windows-1-Install-Python-Deps.bat`**. |
+| **Ollama AI models** | Pulled after install with **`ollama pull ...`** (large downloads). |
+| **One single combined “JSQL.exe”** | This release is a **script + source** layout; a full native installer can be added later. |
 
 ---
 
 ## If something fails
 
-- Read **`README.md`** in the same folder for developers’ details, environment variables, and API notes.
-- **Backend problems** — ensure **`Windows-1-Install-Python-Deps.bat`** completed without errors and that **`backend-python\.venv`** exists.
-- **AI errors** — start **Ollama** and pull a model (`ollama pull llama3.2`).
-- **“Maven not found”** — you should **not** need global Maven if **`frontend-java\mvnw.cmd`** is present; use the provided batch files.
+- **`Install-Bundled-Ollama.bat` says Ollama is missing** — You probably cloned Git without the Release zip; use the zip link at the top or install from ollama.com.
+- **Backend / API errors** — Run **`Windows-1-Install-Python-Deps.bat`** again and check that **`backend-python\.venv`** exists.
+- **AI errors** — Ensure Ollama is running (system tray) and you ran **`ollama pull`** for at least one model.
+- **More detail** — See **`README.md`**.
 
 ---
 
-## Sharing and license
+## Licenses
 
-The project is open source under the **MIT License** — see **`LICENSE`**. You may download, use, and share it according to that file.
+JSQL is **MIT** — see **`LICENSE`**. The bundled **`OllamaSetup.exe`** belongs to the **Ollama** project; see **`bundled\THIRD-PARTY-Ollama.txt`**.

@@ -1,4 +1,5 @@
-# Builds a portable zip from the tagged commit and attaches it to GitHub Releases.
+# Builds a Windows zip: JSQL source tree + official OllamaSetup.exe in jsql/bundled/
+# Uploads as JSQL-Windows-with-Ollama.zip for a stable "latest" download URL.
 name: Release zip
 
 on:
@@ -16,24 +17,47 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Create portable archive
+      - name: Build zip (JSQL + Ollama Windows installer)
         run: |
-          TAG="${GITHUB_REF_NAME:-snapshot}"
-          OUT="jsql-${TAG}.zip"
-          git archive --format=zip --prefix=jsql/ -o "${OUT}" HEAD
-          echo "Created ${OUT}"
-          ls -la "${OUT}"
+          set -e
+          STAGE="stage"
+          OUT="JSQL-Windows-with-Ollama.zip"
+          mkdir -p "${STAGE}"
+          git archive --format=tar --prefix=jsql/ HEAD | tar -C "${STAGE}" -xf -
+          mkdir -p "${STAGE}/jsql/bundled"
+          OLLAMA_URL="$(python3 << 'PY'
+          import json
+          import urllib.request
+          url = "https://api.github.com/repos/ollama/ollama/releases/latest"
+          req = urllib.request.Request(url, headers={"User-Agent": "jsql-release-workflow"})
+          with urllib.request.urlopen(req) as r:
+              data = json.load(r)
+          for a in data.get("assets", []):
+              if a.get("name") == "OllamaSetup.exe":
+                  print(a["browser_download_url"])
+                  break
+          else:
+              raise SystemExit("OllamaSetup.exe not found in ollama/ollama latest release")
+          PY
+          )"
+          echo "Downloading Ollama from: ${OLLAMA_URL}"
+          curl -fL --retry 3 --retry-delay 10 \
+            -o "${STAGE}/jsql/bundled/OllamaSetup.exe" \
+            "${OLLAMA_URL}"
+          ls -lh "${STAGE}/jsql/bundled/OllamaSetup.exe"
+          ( cd "${STAGE}" && zip -r -q "../${OUT}" jsql )
+          ls -lh "${OUT}"
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: jsql-portable-zip
-          path: jsql-*.zip
+          name: JSQL-Windows-with-Ollama
+          path: JSQL-Windows-with-Ollama.zip
 
       - name: Attach to GitHub Release
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          files: jsql-*.zip
+          files: JSQL-Windows-with-Ollama.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

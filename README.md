@@ -4,10 +4,15 @@ Local-first **SQL + AI data analysis** desktop app: **JavaFX** frontend + **Fast
 
 ## Download for end users (public)
 
-- **GitHub**: create a repository and push this project, then use **Releases** so visitors can download a **zip** (see [docs/GITHUB-PUBLISH.md](docs/GITHUB-PUBLISH.md)).
-- **Plain-language install guide**: [docs/HOW-TO-DOWNLOAD.md](docs/HOW-TO-DOWNLOAD.md) — extract the zip, run **`scripts\Windows-1-Install-Python-Deps.bat`** once, then **`Start-JSQL.bat`** or **`scripts\Windows-2-Start-JSQL.bat`**.
-- **Ollama** is **not** bundled (install separately from [ollama.com/download](https://ollama.com/download)); SQL/CSV work without it.
-- Pushing a **Git tag** and publishing a **Release** runs [`.github/workflows/release.yml`](.github/workflows/release.yml), which attaches **`jsql-<tag>.zip`** to the release.
+**One-click zip (JSQL + official Ollama installer for Windows):**
+
+[https://github.com/AmmarJamshed/jsql/releases/latest/download/JSQL-Windows-with-Ollama.zip](https://github.com/AmmarJamshed/jsql/releases/latest/download/JSQL-Windows-with-Ollama.zip)
+
+That file appears under **Releases** after you publish a release (GitHub Actions builds it). It contains the full app **and** **`bundled\OllamaSetup.exe`** (official installer downloaded from [ollama/ollama releases](https://github.com/ollama/ollama/releases) at build time — MIT license, see **`bundled\THIRD-PARTY-Ollama.txt`**).
+
+- **Plain-language steps**: [docs/HOW-TO-DOWNLOAD.md](docs/HOW-TO-DOWNLOAD.md) — extract the zip → run **`scripts\Install-Bundled-Ollama.bat`** once if Ollama is not installed yet → **`scripts\Windows-1-Install-Python-Deps.bat`** once → **`Start-JSQL.bat`**.
+- **Repo “About” description** (GitHub website): paste text from [docs/GITHUB-ABOUT-DESCRIPTION.txt](docs/GITHUB-ABOUT-DESCRIPTION.txt).
+- Maintainers: [docs/GITHUB-PUBLISH.md](docs/GITHUB-PUBLISH.md). Workflow: [`.github/workflows/release.yml`](.github/workflows/release.yml) produces **`JSQL-Windows-with-Ollama.zip`** (stable filename for the link above).
 
 ---
 
@@ -23,7 +28,7 @@ On this machine, **Python** and **Maven** were installed under **`D:\tools\`** a
 - **Python 3.12** at `D:\tools\Py312` (venv for the backend: `D:\jsql\backend-python\.venv`)
 - **Maven 3.9.14** at `D:\tools\apache-maven-3.9.14`
 - **Ollama — must be installed and running on this PC** (local only; JSQL does not call a cloud LLM for NL→SQL / insights):
-  1. Download and install **Ollama for Windows** from [https://ollama.com/download](https://ollama.com/download).
+  1. **Release zip users:** run **`scripts\Install-Bundled-Ollama.bat`** (runs **`bundled\OllamaSetup.exe`**) or double-click that installer yourself. **Git clone users:** install from [ollama.com/download](https://ollama.com/download) or copy **`OllamaSetup.exe`** from a Release zip’s **`bundled`** folder.
   2. Start the **Ollama app** (it listens on **`http://127.0.0.1:11434`**). Keep it running while you use AI features.
   3. Pull at least one model, e.g. **`ollama pull llama3.2`** (or pick a name from **`ollama list`** and set **`OLLAMA_MODEL`** if needed).
   - SQL, CSV, and DuckDB work **without** Ollama; **AI Assistant**, **Insights Gym**, and **NL→SQL** need local Ollama.
