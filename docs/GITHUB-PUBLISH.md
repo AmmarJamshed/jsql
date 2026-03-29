@@ -8,22 +8,32 @@ Use this checklist once on your machine. Replace **`YOUR_USER`** and **`YOUR_REP
 2. **New repository** → name it (e.g. `jsql`) → **Public** → **do not** add README (this project already has one).  
 3. Create the repo and copy the **HTTPS** URL, e.g. `https://github.com/YOUR_USER/jsql.git`.
 
-## 2. Commit the project from your computer
+## 2. Push from your computer
 
-Open **PowerShell** in the **`jsql`** folder (the one that contains `frontend-java`, `backend-python`, `README.md`).
+If you **already** ran `git init` and have a commit (this repo does), you only need a remote and a push.
+
+### Option A — automated script (token in env)
+
+1. Create a **Personal Access Token**: GitHub → **Settings** → **Developer settings** → **Personal access tokens**. Give it **`repo`** scope (classic) or fine-grained access to **Contents: Read and write** on the new repository.
+2. In PowerShell:
 
 ```powershell
 cd D:\jsql
-git init
-git add .
-git status
-git commit -m "Initial commit: JSQL desktop app (JavaFX + FastAPI)"
-git branch -M main
+$env:GITHUB_PAT = "paste_your_token_here"
+.\scripts\Publish-To-GitHub.ps1 -Owner "YOUR_GITHUB_USERNAME" -Repo "jsql"
+```
+
+The script creates **`YOUR_GITHUB_USERNAME/jsql`** if it does not exist, then pushes **`main`**.
+
+### Option B — manual
+
+```powershell
+cd D:\jsql
 git remote add origin https://github.com/YOUR_USER/YOUR_REPO.git
 git push -u origin main
 ```
 
-If `git` asks you to sign in, use a **Personal Access Token** (GitHub → Settings → Developer settings) when prompted for a password, or use **GitHub CLI** (`gh auth login`).
+If `git` asks you to sign in, use a **Personal Access Token** as the password (GitHub no longer accepts account passwords for Git HTTPS), or sign in with **GitHub CLI** (`gh auth login`).
 
 ## 3. Attach a zip to a Release (for easy public download)
 
