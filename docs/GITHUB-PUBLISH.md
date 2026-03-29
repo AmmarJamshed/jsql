@@ -45,9 +45,11 @@ If `git` asks you to sign in, use a **Personal Access Token** as the password (G
 
 If **[`.github/workflows/release.yml`](../.github/workflows/release.yml)** is enabled, Actions will build **`JSQL-Windows-with-Ollama.zip`** (app + official **`OllamaSetup.exe`** in **`jsql/bundled/`**) and attach it to the release.
 
-**Stable download link for README** (replace owner/repo if needed):
+**Stable download link for README** (replace owner/repo if needed — works after first successful run on `main`):
 
-`https://github.com/YOUR_USER/YOUR_REPO/releases/latest/download/JSQL-Windows-with-Ollama.zip`
+`https://github.com/YOUR_USER/YOUR_REPO/releases/download/continuous/JSQL-Windows-with-Ollama.zip`
+
+(`releases/latest/download/...` only works after you publish a **non‑prerelease** versioned release; the **`continuous`** prerelease is updated automatically on every push to `main`.)
 
 ## 4. Point readers to the download
 

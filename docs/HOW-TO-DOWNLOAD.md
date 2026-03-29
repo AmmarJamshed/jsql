@@ -6,13 +6,15 @@ JSQL is a **desktop app** for your own computer. This guide is written so you do
 
 ## Easiest download (one zip, includes Ollama installer)
 
-1. Open this link in your browser (**always points at the newest release**):
+1. Open this link in your browser (**rolling build from `main` — no manual release required**):
 
-   **[https://github.com/AmmarJamshed/jsql/releases/latest/download/JSQL-Windows-with-Ollama.zip](https://github.com/AmmarJamshed/jsql/releases/latest/download/JSQL-Windows-with-Ollama.zip)**
+   **[https://github.com/AmmarJamshed/jsql/releases/download/continuous/JSQL-Windows-with-Ollama.zip](https://github.com/AmmarJamshed/jsql/releases/download/continuous/JSQL-Windows-with-Ollama.zip)**
 
-2. If the download does not start, go to **[Releases](https://github.com/AmmarJamshed/jsql/releases)** and click **`JSQL-Windows-with-Ollama.zip`** under **Assets**.
+2. If you see **Not Found**, the workflow may still be running: open **[Actions](https://github.com/AmmarJamshed/jsql/actions)** → wait for **Release zip** to finish → try again.
 
-3. **Extract** the zip anywhere (for example `D:\jsql` or `Desktop\jsql`). You should see a **`jsql`** folder containing **`bundled`**, **`scripts`**, **`frontend-java`**, **`backend-python`**, etc.
+3. You can also open **[Releases](https://github.com/AmmarJamshed/jsql/releases)** → **Latest Windows bundle (auto)** → download **`JSQL-Windows-with-Ollama.zip`** under **Assets**.
+
+4. **Extract** the zip anywhere (for example `D:\jsql` or `Desktop\jsql`). You should see a **`jsql`** folder containing **`bundled`**, **`scripts`**, **`frontend-java`**, **`backend-python`**, etc.
 
 Inside **`jsql\bundled`** you will find **`OllamaSetup.exe`** — that is the **official** Ollama Windows installer (MIT license, from the Ollama project). You do **not** need to visit ollama.com first.
 

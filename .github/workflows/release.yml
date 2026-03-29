@@ -1,8 +1,12 @@
 # Builds a Windows zip: JSQL source tree + official OllamaSetup.exe in jsql/bundled/
-# Uploads as JSQL-Windows-with-Ollama.zip for a stable "latest" download URL.
+# - Every push to main: uploads to rolling release tag "continuous" (stable download URL).
+# - Publishing a Release: also attaches the same zip to that release.
 name: Release zip
 
 on:
+  push:
+    branches:
+      - main
   release:
     types: [published]
   workflow_dispatch:
@@ -61,3 +65,20 @@ jobs:
           files: JSQL-Windows-with-Ollama.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Rolling bundle: works without creating a versioned Release (fixes 404 on /releases/latest/download).
+      - name: Publish to rolling release "continuous"
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          REPO="${{ github.repository }}"
+          if ! gh release view continuous --repo "$REPO" 2>/dev/null; then
+            gh release create continuous \
+              --repo "$REPO" \
+              --title "Latest Windows bundle (auto)" \
+              --notes "Built from **main**. Includes JSQL + official **OllamaSetup.exe**. For tagged releases see [all releases](https://github.com/$REPO/releases)." \
+              --prerelease
+          fi
+          gh release upload continuous JSQL-Windows-with-Ollama.zip --repo "$REPO" --clobber

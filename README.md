@@ -6,9 +6,11 @@ Local-first **SQL + AI data analysis** desktop app: **JavaFX** frontend + **Fast
 
 **One-click zip (JSQL + official Ollama installer for Windows):**
 
-[https://github.com/AmmarJamshed/jsql/releases/latest/download/JSQL-Windows-with-Ollama.zip](https://github.com/AmmarJamshed/jsql/releases/latest/download/JSQL-Windows-with-Ollama.zip)
+[https://github.com/AmmarJamshed/jsql/releases/download/continuous/JSQL-Windows-with-Ollama.zip](https://github.com/AmmarJamshed/jsql/releases/download/continuous/JSQL-Windows-with-Ollama.zip)
 
-That file appears under **Releases** after you publish a release (GitHub Actions builds it). It contains the full app **and** **`bundled\OllamaSetup.exe`** (official installer downloaded from [ollama/ollama releases](https://github.com/ollama/ollama/releases) at build time — MIT license, see **`bundled\THIRD-PARTY-Ollama.txt`**).
+This uses the rolling **`continuous`** release that **GitHub Actions updates on every push to `main`**, so the link works even before you create a versioned release. If you see **Not Found**, open the **[Actions](https://github.com/AmmarJamshed/jsql/actions)** tab and wait until **Release zip** finishes (usually a few minutes), then try again.
+
+The zip contains the full app **and** **`bundled\OllamaSetup.exe`** (official installer from [ollama/ollama releases](https://github.com/ollama/ollama/releases) at build time — MIT license, see **`bundled\THIRD-PARTY-Ollama.txt`**). If you publish a **stable** (non‑prerelease) version tag, you can also use `releases/latest/download/...` for that asset name.
 
 - **Plain-language steps**: [docs/HOW-TO-DOWNLOAD.md](docs/HOW-TO-DOWNLOAD.md) — extract the zip → run **`scripts\Install-Bundled-Ollama.bat`** once if Ollama is not installed yet → **`scripts\Windows-1-Install-Python-Deps.bat`** once → **`Start-JSQL.bat`**.
 - **Repo “About” description** (GitHub website): paste text from [docs/GITHUB-ABOUT-DESCRIPTION.txt](docs/GITHUB-ABOUT-DESCRIPTION.txt).
